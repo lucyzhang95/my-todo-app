@@ -1,4 +1,6 @@
-FILEPATH = "/Users/lucyzhang1116/Documents/web_app1/todos.txt"
+import os
+
+FILEPATH = os.path.join(os.getcwd(), "todos.txt")
 
 
 def get_todos(filepath=FILEPATH):
