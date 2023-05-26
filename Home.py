@@ -3,6 +3,8 @@ import functions
 
 todos = functions.get_todos()
 
+st.set_page_config(layout='wide')
+
 
 def add_todo():
     todo = st.session_state["new_todo"] + "\n"
@@ -11,8 +13,14 @@ def add_todo():
 
 
 st.title("My Todo App")
-st.subheader("This is my todo app.")
-st.write("This app is to increase your productivity.")
+st.subheader("This is my todo app. 这是一款记录事情的App。")
+st.write("This app is to increase your <b>productivity</b>."
+         "它可以帮助你提升工作的效率！",
+         unsafe_allow_html=True)
+
+st.text_input(label="", placeholder="Add a new todo.../加入一个新的事情",
+              on_change=add_todo, key='new_todo')
+
 
 for index, todo in enumerate(todos):
     checkbox = st.checkbox(todo, key=todo)
@@ -21,9 +29,6 @@ for index, todo in enumerate(todos):
         functions.write_todos(todos)
         del st.session_state[todo]
         st.experimental_rerun()
-
-st.text_input(label="", placeholder="Add a new todo...",
-              on_change=add_todo, key='new_todo')
 
 # Each user session is separate from other user sessions
 # (cpu of the webserver is going to handle the requests)
